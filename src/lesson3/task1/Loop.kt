@@ -75,8 +75,22 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
-
+fun fib(n: Int): Int {
+    if (n == 1 || n == 2){
+        return 1
+    }
+    var f1 = 1;
+    var f2 = 1;
+    var fn = 0;
+    for(i in 3..n){
+        fn = f1 + f2
+        f1 = f2
+        f2 = fn
+    }
+    return fn
+}
+//    if (n <= 2) 1
+//    else fib(n - 2) + fib (n - 1)
 /**
  * Простая
  *
@@ -106,7 +120,16 @@ fun maxDivisor(n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean{
+    if ((m == n) && (n != 1) && (m != 1)) return false
+    if ((m == 1) || (n == 1)) return true
+    if ((m % 2 == 0) && (n % 2 == 0)) return false
+    if ((m % n == 0) || (n % m == 0)) return false
+    for (i in 3..m step 2){
+        if((m % i == 0) && (n % i == 0)) return false
+    }
+    return true
+}
 
 /**
  * Простая
@@ -164,7 +187,17 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var count = 0
+    var x = n
+    if ((x < 10) && (x > 0)) return x
+    while (x > 0) {
+        var m = x % 10
+        x = x / 10
+        count = count * 10 + m
+    }
+    return count
+}
 
 /**
  * Средняя
@@ -175,7 +208,13 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    if (n == revert(n)){
+        return true
+    }else{
+        return false
+    }
+}
 
 /**
  * Средняя
@@ -208,3 +247,4 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int = TODO()
+

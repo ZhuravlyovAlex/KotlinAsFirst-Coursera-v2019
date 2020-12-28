@@ -236,7 +236,37 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String{
+    val arab: Array<Int> = arrayOf(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    val rome: Array<String> = arrayOf("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+    var result = ""
+    var arabicNumber = n
+    var num = 0
+    var rem = 0
+    for(i in 0 until arab.size) {
+        num = arabicNumber / arab[i]
+        rem = arabicNumber % arab[i]
+        if (num > 0 && num < 4) {
+            for (j in 0 until num)
+                result += rome[i]
+        } else if (num >= 4 && num< 9) {
+            for (j in num until 5) {
+                result += rome[i]
+            }
+            result += rome[i - 1]
+            for(j in 5 until num){
+                result += rome[i]
+            }
+        } else if (num == 9) {
+            result += rome[i] + rome[i - 2]
+        }
+        if (rem == 0)
+            break
+        arabicNumber = rem
+    }
+        return result
+
+}
 
 /**
  * Очень сложная
